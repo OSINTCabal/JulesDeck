@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jules Local</title>
+  <link rel="stylesheet" href="chrome.css" />
+  <script>
+    // CommonJS compatibility shim for sandboxed renderer
+    var exports = {};
+  </script>
+</head>
+<body>
+  <svg width="0" height="0" style="position:absolute;pointer-events:none;overflow:hidden;" aria-hidden="true">
+    <defs>
+      <linearGradient id="hero-gem-gradient" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
+        <stop offset="0%" stop-color="#c084fc"/>
+        <stop offset="50%" stop-color="#9333ea"/>
+        <stop offset="100%" stop-color="#3b82f6"/>
+      </linearGradient>
+    </defs>
+  </svg>
+  <div class="chrome-strip" id="chrome-strip">
+    <!-- Left Cluster: App Icon & Navigation Controls -->
+    <div class="cluster left-cluster">
+      <div class="brand-icon" id="brand-icon" title="Jules Local — Desktop Client for Google Jules">
+        <svg width="20" height="20" viewBox="0 0 512 512" fill="none">
+          <rect width="512" height="512" rx="112" fill="#0d0d11" stroke="#23232a" stroke-width="8" />
+          <g transform="translate(114.568, 103.293) scale(3.36)">
+            <path d="M41.824 4.80334C55.2044 4.80334 66.0631 15.6622 66.0632 29.0426C66.0632 29.7486 66.0299 30.4552 65.9626 31.1276C65.9963 31.4636 66.0632 31.7999 66.0632 32.1696V51.6354C66.0632 52.7782 65.7946 53.8539 65.324 54.8287V74.4957C65.324 76.6137 67.0722 78.3619 69.1902 78.3619C71.2421 78.3619 72.9471 76.7212 73.0515 74.693L73.0613 74.2985C73.1659 72.2704 74.8708 70.6295 76.9226 70.6295C79.0405 70.6296 80.7886 72.3443 80.7888 74.4957C80.7888 80.6143 76.0149 85.5898 69.9636 86.027C69.7283 86.0606 69.4591 86.0944 69.1902 86.0944C68.9212 86.0944 68.6857 86.0942 68.4167 86.027C62.399 85.6235 57.5916 80.648 57.5916 74.4957V59.0309H52.4138V74.3619C52.4136 76.4798 50.6991 78.2281 48.5476 78.2281C46.4298 78.228 44.6816 76.5133 44.6814 74.3619V59.0309H39.5046V74.3619C39.5044 76.4797 37.7898 78.228 35.6384 78.2281C33.5205 78.2281 31.7724 76.5134 31.7722 74.3619V59.0309H26.5945V74.4957C26.5945 80.6143 21.787 85.6234 15.7693 86.027C15.534 86.0606 15.2648 86.0944 14.9958 86.0944C14.7269 86.0944 14.4913 86.0942 14.2224 86.027C8.20468 85.6234 3.39722 80.648 3.39722 74.4957C3.3974 72.3779 5.14552 70.6295 7.26343 70.6295C9.38133 70.6295 11.1295 72.3443 11.1296 74.4957C11.1296 76.6137 12.8779 78.3619 14.9958 78.3619C17.1139 78.3619 18.8621 76.6137 18.8621 74.4957V55.8033C18.0554 54.6268 17.5848 53.1816 17.5847 51.6354V32.1696C17.5847 31.7999 17.6517 31.4636 17.6853 31.1276C17.6181 30.4216 17.5847 29.7486 17.5847 29.0426C17.5848 15.6623 28.4436 4.80336 41.824 4.80334ZM29.1833 38.9938C27.0481 38.9938 25.3171 41.1619 25.3171 43.8356C25.3173 46.5091 27.0482 48.6764 29.1833 48.6764C31.3184 48.6763 33.0494 46.509 33.0496 43.8356C33.0496 41.1619 31.3185 38.9939 29.1833 38.9938ZM55.0027 38.9938C52.8675 38.9938 51.1365 41.1619 51.1365 43.8356C51.1366 46.5091 52.8676 48.6763 55.0027 48.6764C57.1378 48.6764 58.8687 46.5091 58.8689 43.8356C58.8689 41.1619 57.1379 38.9938 55.0027 38.9938Z" fill="#a855f7" />
+          </g>
+        </svg>
+      </div>
+      <span class="brand-title-text" style="font-size: 13px; font-weight: 600; color: #f1f5f9; letter-spacing: -0.2px; user-select: none;">Jules Local</span>
+
+      <div class="nav-group">
+        <button id="btn-back" class="btn-icon" title="Back (Alt+Left)" disabled>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+        <button id="btn-forward" class="btn-icon" title="Forward (Alt+Right)" disabled>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+        <button id="btn-reload" class="btn-icon" title="Reload (Ctrl+R)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M23 4v6h-6"></path>
+            <path d="M1 20v-6h6"></path>
+            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Center Cluster: Mode Switcher & Local Repo Selector -->
+    <div class="cluster center-cluster" id="center-cluster">
+      <!-- Segmented Mode Switcher: Cloud vs Local vs Standalone Repo -->
+      <div class="mode-segmented-toggle" id="mode-segmented-toggle" role="tablist" aria-label="Jules Local Workspace Mode">
+        <button id="tab-repo-mode" class="mode-tab" role="tab" type="button" aria-selected="false" title="GitHub / Repo Mode: Standalone Google Jules Web App for GitHub Repositories (Ctrl+1)">
+          <svg class="mode-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+          </svg>
+          <span id="tab-repo-label">GitHub Repo</span>
+          <span id="tab-repo-badge" class="mode-badge hidden">0</span>
+        </button>
+        <button id="tab-local-mode" class="mode-tab" role="tab" type="button" aria-selected="false" title="Local Mode: Git Workspace & CLI Runner (Ctrl+2 or Alt+2)">
+          <svg class="mode-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="4 17 10 11 4 5"></polyline>
+            <line x1="12" y1="19" x2="20" y2="19"></line>
+          </svg>
+          <span id="tab-local-label">Jules Local</span>
+          <span id="tab-local-badge" class="mode-badge hidden">0</span>
+        </button>
+        <button id="tab-cloud-mode" class="mode-tab active" role="tab" type="button" aria-selected="true" title="Cloud Mode: Google Jules Web Client (Ctrl+1 or Alt+1)">
+          <svg class="mode-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path>
+          </svg>
+          <span id="tab-cloud-label">Cloud Jules</span>
+          <span id="tab-cloud-badge" class="mode-badge hidden">Offline</span>
+          <span id="standalone-fallback-badge" class="mode-badge hidden">Standalone Mode Active</span>
+        </button>
+        <button id="tab-legacy-cloud-mode" class="mode-tab legacy-cloud-tab hidden" role="tab" type="button" aria-selected="false" title="Optional Legacy jules.google.com Web View (auto-hidden when Google sunsets Jules)">
+          <svg class="mode-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="2" y1="12" x2="22" y2="12"></line>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+          </svg>
+          <span>Legacy Web</span>
+        </button>
+      </div>
+
+      <!-- Local Repository Bar with Dropdown -->
+      <div class="local-repo-bar repo-picker-wrapper" id="local-repo-bar">
+        <button id="btn-select-repo" class="btn-repo-select" type="button" title="Choose local directory or Git repository (Ctrl+O)">
+          <svg class="folder-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+          </svg>
+          <span id="repo-select-label" class="repo-select-text">Select Local Repo...</span>
+          <span id="repo-status-badge" class="repo-status-badge hidden">Active</span>
+          <svg class="chevron-icon" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
+
+        <button id="btn-clear-repo" class="btn-icon repo-clear-btn hidden" type="button" title="Clear / Detach Repository">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+
+        <!-- Dropdown Menu for Local Repositories -->
+        <div id="repo-picker-dropdown" class="repo-picker-dropdown hidden">
+          <div class="dropdown-header">Local Codebases</div>
+          <div id="dropdown-active-repo" class="dropdown-active-repo hidden">
+            <!-- Active repo card populated by JS -->
+          </div>
+          <div class="dropdown-section-title">Recent Repositories</div>
+          <div id="dropdown-recent-repos" class="dropdown-recent-list">
+            <!-- Recent repos populated by JS -->
+          </div>
+          <div class="menu-divider"></div>
+          <button id="dropdown-btn-open" class="dropdown-item" type="button">
+            <svg class="dropdown-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+            </svg>
+            <span>Open Local Folder / Git Repository...</span>
+            <span class="menu-shortcut">Ctrl+O</span>
+          </button>
+          <button id="dropdown-btn-init" class="dropdown-item" type="button">
+            <svg class="dropdown-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+            <span>Initialize New Git Repository Here...</span>
+          </button>
+          <button id="dropdown-btn-detach" class="dropdown-item dropdown-item-danger hidden" type="button">
+            <svg class="dropdown-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+            <span>Detach Active Repository</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Draggable Region (frameless window moving surface) -->
+    <div class="drag-region" id="drag-region"></div>
+
+    <!-- Right Cluster: App Menu & Window Controls -->
+    <div class="cluster right-cluster">
+      <!-- Discreet App / Session Menu Button -->
+      <div class="app-menu-wrapper" id="app-menu-wrapper">
+        <button id="btn-app-menu" class="win-btn btn-app-menu" title="Application & Session Menu">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="1.5"></circle>
+            <circle cx="12" cy="5" r="1.5"></circle>
+            <circle cx="12" cy="19" r="1.5"></circle>
+          </svg>
+        </button>
+
+        <!-- Dropdown Menu Panel -->
+        <div id="app-menu-dropdown" class="app-menu-dropdown hidden">
+          <!-- Jules CLI Status Header -->
+          <div class="menu-diagnostic-header" id="menu-diagnostic-header">
+            <div class="diagnostic-indicator">
+              <span id="diagnostic-dot" class="status-dot dot-checking"></span>
+              <span id="diagnostic-label" class="diagnostic-title">Jules CLI</span>
+            </div>
+            <span id="diagnostic-version-badge" class="diagnostic-badge">Checking...</span>
+          </div>
+
+          <div class="menu-divider"></div>
+
+          <!-- Jules Web Settings -->
+          <button id="menu-btn-settings" class="menu-item" title="Open Google Jules Account & General Settings">
+            <div class="menu-item-left">
+              <svg class="menu-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="3"></circle>
+                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+              </svg>
+              <span>Jules Settings...</span>
+            </div>
+            <span class="menu-shortcut">Ctrl+,</span>
+          </button>
+
+          <!-- Chrome Cookie Session Sync -->
+          <button id="menu-btn-sync-session" class="menu-item" title="Import active Google session cookies from Chrome">
+            <div class="menu-item-left">
+              <svg class="menu-icon" id="sync-icon-svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path>
+              </svg>
+              <span id="sync-session-text">Sync Session from Google Chrome</span>
+            </div>
+            <span class="menu-shortcut">Ctrl+Shift+I</span>
+          </button>
+
+          <!-- Manage Accounts Sub-Section -->
+          <div class="menu-section-header">Active Google Account</div>
+          <div id="menu-accounts-list" class="menu-accounts-container">
+            <!-- Dynamically populated accounts -->
+          </div>
+          <button id="menu-btn-add-account" class="menu-item menu-item-sub">
+            <div class="menu-item-left">
+              <svg class="menu-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+              <span>Add Another Account...</span>
+            </div>
+          </button>
+
+          <div class="menu-divider"></div>
+
+          <!-- Quick Open Local Repo -->
+          <button id="menu-btn-open-folder" class="menu-item">
+            <div class="menu-item-left">
+              <svg class="menu-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+              </svg>
+              <span>Quick Open Local Folder...</span>
+            </div>
+            <span class="menu-shortcut">Ctrl+O</span>
+          </button>
+
+          <!-- Reload View -->
+          <button id="menu-btn-reload" class="menu-item">
+            <div class="menu-item-left">
+              <svg class="menu-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M23 4v6h-6"></path>
+                <path d="M1 20v-6h6"></path>
+                <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+              </svg>
+              <span>Reload</span>
+            </div>
+            <span class="menu-shortcut">Ctrl+R</span>
+          </button>
+
+          <div class="menu-divider"></div>
+
+          <!-- Sign Out -->
+          <button id="menu-btn-logout" class="menu-item menu-item-danger">
+            <div class="menu-item-left">
+              <svg class="menu-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                <polyline points="16 17 21 12 16 7"></polyline>
+                <line x1="21" y1="12" x2="9" y2="12"></line>
+              </svg>
+              <span>Sign Out & Clear Active Session</span>
+            </div>
+          </button>
+        </div>
+      </div>
+
+      <div class="window-controls-divider"></div>
+
+      <button id="btn-minimize" class="win-btn" title="Minimize">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+        </svg>
+      </button>
+      <button id="btn-maximize" class="win-btn" title="Maximize">
+        <svg id="icon-maximize" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+        </svg>
+        <svg id="icon-restore" class="hidden" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="8" y="3" width="13" height="13" rx="1.5" ry="1.5"></rect>
+          <path d="M3 8v13h13"></path>
+        </svg>
+      </button>
+      <button id="btn-close" class="win-btn btn-close" title="Close (Ctrl+Q)">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <!-- 2px Google Gradient Loading Bar -->
+    <div id="loading-bar" class="loading-bar"></div>
+  </div>
+
+  <!-- Local Mode Studio Workspace (Complete Google Jules Web Clone) -->
+  <div id="local-mode-drawer" class="git-drawer local-workspace hidden">
+    <!-- 3-Column Studio matching Google Jules Web -->
+    <div class="workspace-layout" id="drawer-body-grid">
+      <!-- 1. LEFT SIDEBAR: Jules Web Clone Navigation -->
+      <aside class="workspace-sidebar" id="workspace-sidebar">
+        <!-- Jules Web Left Sidebar Header: Octopus Mascot + wordmark + collapse toggle -->
+        <div class="jules-sidebar-header" id="jules-sidebar-header">
+          <div class="jules-sidebar-brand" id="jules-sidebar-brand">
+            <svg class="jules-octopus-sidebar" width="22" height="25" viewBox="0 0 84 95" fill="none">
+              <path d="M41.824 4.80334C55.2044 4.80334 66.0631 15.6622 66.0632 29.0426C66.0632 29.7486 66.0299 30.4552 65.9626 31.1276C65.9963 31.4636 66.0632 31.7999 66.0632 32.1696V51.6354C66.0632 52.7782 65.7946 53.8539 65.324 54.8287V74.4957C65.324 76.6137 67.0722 78.3619 69.1902 78.3619C71.2421 78.3619 72.9471 76.7212 73.0515 74.693L73.0613 74.2985C73.1659 72.2704 74.8708 70.6295 76.9226 70.6295C79.0405 70.6296 80.7886 72.3443 80.7888 74.4957C80.7888 80.6143 76.0149 85.5898 69.9636 86.027C69.7283 86.0606 69.4591 86.0944 69.1902 86.0944C68.9212 86.0944 68.6857 86.0942 68.4167 86.027C62.399 85.6235 57.5916 80.648 57.5916 74.4957V59.0309H52.4138V74.3619C52.4136 76.4798 50.6991 78.2281 48.5476 78.2281C46.4298 78.228 44.6816 76.5133 44.6814 74.3619V59.0309H39.5046V74.3619C39.5044 76.4797 37.7898 78.228 35.6384 78.2281C33.5205 78.2281 31.7724 76.5134 31.7722 74.3619V59.0309H26.5945V74.4957C26.5945 80.6143 21.787 85.6234 15.7693 86.027C15.534 86.0606 15.2648 86.0944 14.9958 86.0944C14.7269 86.0944 14.4913 86.0942 14.2224 86.027C8.20468 85.6234 3.39722 80.648 3.39722 74.4957C3.3974 72.3779 5.14552 70.6295 7.26343 70.6295C9.38133 70.6295 11.1295 72.3443 11.1296 74.4957C11.1296 76.6137 12.8779 78.3619 14.9958 78.3619C17.1139 78.3619 18.8621 76.6137 18.8621 74.4957V55.8033C18.0554 54.6268 17.5848 53.1816 17.5847 51.6354V32.1696C17.5847 31.7999 17.6517 31.4636 17.6853 31.1276C17.6181 30.4216 17.5847 29.7486 17.5847 29.0426C17.5848 15.6623 28.4436 4.80336 41.824 4.80334ZM29.1833 38.9938C27.0481 38.9938 25.3171 41.1619 25.3171 43.8356C25.3173 46.5091 27.0482 48.6764 29.1833 48.6764C31.3184 48.6763 33.0494 46.509 33.0496 43.8356C33.0496 41.1619 31.3185 38.9939 29.1833 38.9938ZM55.0027 38.9938C52.8675 38.9938 51.1365 41.1619 51.1365 43.8356C51.1366 46.5091 52.8676 48.6763 55.0027 48.6764C57.1378 48.6764 58.8687 46.5091 58.8689 43.8356C58.8689 41.1619 57.1379 38.9938 55.0027 38.9938Z" fill="#a855f7"/>
+            </svg>
+            <span class="jules-wordmark">jules</span>
+          </div>
+          <button id="btn-collapse-sidebar-inner" class="btn-icon jules-collapse-toggle" title="Collapse sidebar" type="button">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="11 17 6 12 11 7"></polyline>
+              <polyline points="18 17 13 12 18 7"></polyline>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Jules Search Box: Search for repo or sessions -->
+        <div class="jules-sidebar-search-box">
+          <svg class="search-glass-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" id="jules-sidebar-search" class="jules-sidebar-search-input" placeholder="Search for repo or sessions" />
+        </div>
+
+        <!-- New Task Button (Local Studio & New Session Workflow) -->
+        <div class="sidebar-top">
+          <button id="btn-new-task" class="btn-new-task" type="button" title="Start a fresh local task session">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+            <span>New Task</span>
+          </button>
+        </div>
+
+        <!-- Collapsible Section: Recent Sessions (#sidebar-section-sessions) -->
+        <div class="sidebar-section sessions-section" id="sidebar-section-sessions">
+          <div class="sidebar-section-header">
+            <div class="section-title-wrap">
+              <svg class="section-toggle-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+              <span class="sidebar-section-title">Recent sessions</span>
+            </div>
+            <div class="sidebar-header-actions">
+              <button id="btn-clear-sessions" class="sidebar-icon-btn" title="Clear / Dismiss Local Sessions" type="button">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                </svg>
+              </button>
+              <button id="btn-refresh-sessions" class="sidebar-icon-btn" title="Refresh Sessions" type="button">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M23 4v6h-6M1 20v-6h6M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+          <!-- Live GitHub / Jules Sessions List -->
+          <div id="github-sessions-list" class="github-sessions-list">
+            <div class="session-item-row" data-session-id="sample-sess-1">
+              <span class="session-status-dot status-completed" title="Completed"></span>
+              <span class="session-item-title">Refactor authentication flow</span>
+              <button class="session-menu-trigger" type="button" title="Session options">···</button>
+            </div>
+          </div>
+          <button id="btn-sessions-view-more" class="btn-sessions-view-more" type="button">+ View more</button>
+          <!-- Local sessions list (preserved for local mode) -->
+          <div id="jules-sessions-list" class="sessions-list-content">
+            <span class="text-muted">Loading sessions...</span>
+          </div>
+        </div>
+
+        <!-- Collapsible Section: Codebases (#sidebar-section-codebases) -->
+        <div class="sidebar-section repos-section" id="sidebar-section-codebases">
+          <div class="sidebar-section-header">
+            <div class="section-title-wrap">
+              <svg class="section-toggle-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+              <span class="sidebar-section-title">Codebases</span>
+            </div>
+            <span id="drawer-cli-pill" class="drawer-cli-pill">CLI: Checking...</span>
+          </div>
+          <!-- Live GitHub Codebases List -->
+          <div id="github-codebases-list" class="github-codebases-list">
+            <div class="codebase-item-row active" data-repo="OSINTCabal/DeepSearch">
+              <svg class="octocat-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+              </svg>
+              <span class="codebase-repo-name">OSINTCabal/DeepSearch</span>
+              <span class="codebase-badge-count">1</span>
+            </div>
+          </div>
+          <!-- Local active repo card & chips (preserved for local mode) -->
+          <div id="sidebar-active-repo-card" class="sidebar-active-repo-card hidden">
+            <div class="active-repo-line">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+              </svg>
+              <span id="sidebar-repo-name" class="sidebar-repo-name">Repo</span>
+            </div>
+            <div class="active-repo-badges">
+              <span id="sidebar-branch-badge" class="badge-branch">main</span>
+              <span id="sidebar-status-badge" class="badge-status">clean</span>
+            </div>
+          </div>
+          <!-- Recent repo chips / list -->
+          <div class="recent-repos-bar" id="recent-repos-bar">
+            <div id="recent-chips-container" class="recent-chips-container">
+              <!-- Dynamically injected chips -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Live Jules Repo Footer: Daily Session Limit & External Links (#jules-sidebar-repo-footer) -->
+        <div class="jules-sidebar-repo-footer" id="jules-sidebar-repo-footer">
+          <div class="session-limit-progress-box">
+            <div class="session-limit-label-row">
+              <span id="jules-session-limit-label" class="jules-session-limit-label">Daily session limit (0/100)</span>
+            </div>
+            <div class="progress-bar-track">
+              <div class="progress-bar-fill" style="width: 0%;"></div>
+            </div>
+          </div>
+          <div class="jules-footer-links-row">
+            <button id="btn-jules-docs" class="footer-link-btn" type="button" title="Documentation">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+              </svg>
+              <span>Docs</span>
+            </button>
+            <button id="btn-jules-discord" class="footer-link-btn" type="button" title="Discord Community">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 6h0a14.5 14.5 0 0 0-4-1.5 9.6 9.6 0 0 0-.5 1 13.8 13.8 0 0 0-3 0 9.6 9.6 0 0 0-.5-1A14.5 14.5 0 0 0 6 6a15.8 15.8 0 0 0-2 10.5 14.4 14.4 0 0 0 4.5 2.2 10.4 10.4 0 0 0 1-1.6 9.3 9.3 0 0 1-1.6-.8l.2-.2a10.8 10.8 0 0 0 7.8 0l.2.2a9.3 9.3 0 0 1-1.6.8 10.4 10.4 0 0 0 1 1.6 14.4 14.4 0 0 0 4.5-2.2A15.8 15.8 0 0 0 18 6z"></path>
+              </svg>
+              <span>Discord</span>
+            </button>
+            <button id="btn-jules-x" class="footer-link-btn" type="button" title="Follow on X">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 4l16 16m0-16L4 20"></path>
+              </svg>
+              <span>X</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Sidebar Footer Matching Google Jules Web Footer -->
+        <div class="sidebar-footer">
+          <div class="sidebar-footer-links">
+            <button id="btn-sidebar-docs" class="footer-link-btn" title="Open Google Jules Documentation">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+              </svg>
+              <span>Docs</span>
+            </button>
+            <button id="btn-sidebar-settings" class="footer-link-btn" title="Open Settings (Ctrl+,)">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="3"></circle>
+                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+              </svg>
+              <span>Settings</span>
+            </button>
+            <button id="btn-sidebar-feedback" class="footer-link-btn" title="Send Feedback">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+              </svg>
+              <span>Feedback</span>
+            </button>
+          </div>
+          <div id="sidebar-account-pill" class="sidebar-account-pill" title="Active Google Account">
+            <div class="account-pill-left">
+              <div id="sidebar-avatar" class="sidebar-avatar">
+                <span id="sidebar-avatar-initial">O</span>
+              </div>
+              <span id="sidebar-account-name" class="account-pill-name">Google User</span>
+            </div>
+            <span class="pro-tag">PRO</span>
+          </div>
+        </div>
+      </aside>
+
+      <!-- 2. CENTER CANVAS: Chat Conversation & Execution -->
+      <main class="workspace-main" id="workspace-main">
+        <!-- Canvas Top Navbar: Exact 1:1 Live Google Jules swebot-navbar -->
+        <header class="canvas-navbar swebot-navbar" id="swebot-navbar">
+          <div class="canvas-navbar-left">
+            <!-- Split-panel Sidebar Toggle Button -->
+            <button id="btn-toggle-jules-sidebar" class="btn-icon jules-sidebar-toggle" title="Toggle Sidebar" type="button">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="9" y1="3" x2="9" y2="21"></line>
+              </svg>
+            </button>
+
+            <!-- Brand Logo: Purple Jules Octopus Mascot + lowercase jules wordmark -->
+            <button id="btn-jules-home-logo" class="btn-jules-home-logo" title="Google Jules" type="button">
+              <svg class="jules-octopus-logo" width="22" height="25" viewBox="0 0 84 95" fill="none">
+                <path d="M41.824 4.80334C55.2044 4.80334 66.0631 15.6622 66.0632 29.0426C66.0632 29.7486 66.0299 30.4552 65.9626 31.1276C65.9963 31.4636 66.0632 31.7999 66.0632 32.1696V51.6354C66.0632 52.7782 65.7946 53.8539 65.324 54.8287V74.4957C65.324 76.6137 67.0722 78.3619 69.1902 78.3619C71.2421 78.3619 72.9471 76.7212 73.0515 74.693L73.0613 74.2985C73.1659 72.2704 74.8708 70.6295 76.9226 70.6295C79.0405 70.6296 80.7886 72.3443 80.7888 74.4957C80.7888 80.6143 76.0149 85.5898 69.9636 86.027C69.7283 86.0606 69.4591 86.0944 69.1902 86.0944C68.9212 86.0944 68.6857 86.0942 68.4167 86.027C62.399 85.6235 57.5916 80.648 57.5916 74.4957V59.0309H52.4138V74.3619C52.4136 76.4798 50.6991 78.2281 48.5476 78.2281C46.4298 78.228 44.6816 76.5133 44.6814 74.3619V59.0309H39.5046V74.3619C39.5044 76.4797 37.7898 78.228 35.6384 78.2281C33.5205 78.2281 31.7724 76.5134 31.7722 74.3619V59.0309H26.5945V74.4957C26.5945 80.6143 21.787 85.6234 15.7693 86.027C15.534 86.0606 15.2648 86.0944 14.9958 86.0944C14.7269 86.0944 14.4913 86.0942 14.2224 86.027C8.20468 85.6234 3.39722 80.648 3.39722 74.4957C3.3974 72.3779 5.14552 70.6295 7.26343 70.6295C9.38133 70.6295 11.1295 72.3443 11.1296 74.4957C11.1296 76.6137 12.8779 78.3619 14.9958 78.3619C17.1139 78.3619 18.8621 76.6137 18.8621 74.4957V55.8033C18.0554 54.6268 17.5848 53.1816 17.5847 51.6354V32.1696C17.5847 31.7999 17.6517 31.4636 17.6853 31.1276C17.6181 30.4216 17.5847 29.7486 17.5847 29.0426C17.5848 15.6623 28.4436 4.80336 41.824 4.80334ZM29.1833 38.9938C27.0481 38.9938 25.3171 41.1619 25.3171 43.8356C25.3173 46.5091 27.0482 48.6764 29.1833 48.6764C31.3184 48.6763 33.0494 46.509 33.0496 43.8356C33.0496 41.1619 31.3185 38.9939 29.1833 38.9938ZM55.0027 38.9938C52.8675 38.9938 51.1365 41.1619 51.1365 43.8356C51.1366 46.5091 52.8676 48.6763 55.0027 48.6764C57.1378 48.6764 58.8687 46.5091 58.8689 43.8356C58.8689 41.1619 57.1379 38.9938 55.0027 38.9938Z" fill="#a855f7"/>
+              </svg>
+              <span class="logo-text">jules</span>
+            </button>
+
+            <!-- Jules Local Canvas Brand Pill (tested by parity suite) -->
+            <div class="canvas-brand-pill" style="display: flex; align-items: center; gap: 7px; margin-right: 4px; padding: 4px 8px; border-radius: 6px; user-select: none;">
+              <svg class="jules-gem-small" width="16" height="16" viewBox="0 0 24 24" fill="none">
+                <path d="M12 2L14.85 9.15L22 12L14.85 14.85L12 22L9.15 14.85L2 12L9.15 9.15L12 2Z" fill="url(#hero-gem-gradient)"/>
+                <circle cx="12" cy="12" r="1.3" fill="#ffffff" fill-opacity="0.9"/>
+              </svg>
+              <span id="canvas-brand-title" style="font-weight: 600; font-size: 13px; color: #f4f4f5; letter-spacing: -0.2px;">Jules Local</span>
+            </div>
+
+            <!-- Workspace Mode Switcher Pill Bar (GitHub / Repo Mode vs Local Folder Mode) -->
+            <div class="workspace-mode-switcher" id="workspace-mode-switcher" role="tablist" aria-label="Studio Workspace Mode">
+              <button id="btn-workspace-mode-repo" class="workspace-mode-pill active" data-workspace-mode="repo" type="button" title="GitHub / Repo Mode: Standalone Google Jules Web App for GitHub Repositories">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                </svg>
+                <span>GitHub / Repo</span>
+              </button>
+              <button id="btn-workspace-mode-local" class="workspace-mode-pill" data-workspace-mode="local" type="button" title="Local Folder Mode: Direct Local Folder &amp; Git Studio">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="4 17 10 11 4 5"></polyline>
+                  <line x1="12" y1="19" x2="20" y2="19"></line>
+                </svg>
+                <span>Local Folder</span>
+              </button>
+            </div>
+
+            <!-- Breadcrumb Navigation (#navbar-session-breadcrumb) -->
+            <div id="navbar-session-breadcrumb" class="navbar-session-breadcrumb">
+              <span class="breadcrumb-chevron">›</span>
+              <svg class="breadcrumb-gh-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+              </svg>
+              <span class="breadcrumb-repo-text" id="breadcrumb-repo-text">OSINTCabal/DeepSearch</span>
+            </div>
+
+            <!-- Context Box: Repo & Branch Switcher Dropdowns -->
+            <div class="context-pill-group">
+              <div class="canvas-repo-picker-wrapper">
+                <button id="btn-canvas-repo-select" class="context-pill" type="button" title="Select or Switch Local Codebase">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+                  </svg>
+                  <span id="canvas-repo-label">No Repo Linked</span>
+                  <svg class="chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </button>
+                <div id="canvas-repo-dropdown" class="canvas-repo-dropdown hidden">
+                  <!-- GitHub Repository Live Search & Connect -->
+                  <div class="github-repo-search-box">
+                    <svg class="search-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="11" cy="11" r="8"></circle>
+                      <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <input type="text" id="github-repo-search-input" class="github-repo-search-input" placeholder="Search GitHub repositories (owner/repo) or paste URL..." />
+                    <button id="btn-github-connect-clone" class="btn-github-connect" type="button" title="Connect &amp; Clone Repository">Connect</button>
+                  </div>
+                  <!-- GitHub Repositories Section -->
+                  <div id="github-repo-section" class="dropdown-section github-repo-section">
+                    <div class="dropdown-section-title">
+                      <span>GitHub Repositories</span>
+                      <button id="btn-refresh-github-repos" class="btn-mini-refresh" type="button" title="Refresh GitHub repositories">↻</button>
+                    </div>
+                    <div id="github-repos-list" class="github-repos-list">
+                      <span class="text-muted">Loading GitHub repositories...</span>
+                    </div>
+                  </div>
+                  <div class="menu-divider"></div>
+                  <div class="dropdown-header">Local Codebases</div>
+                  <div id="canvas-dropdown-active-repo" class="dropdown-active-repo hidden"></div>
+                  <div class="dropdown-section-title">Recent Repositories</div>
+                  <div id="canvas-dropdown-recent-repos" class="dropdown-recent-list"></div>
+                  <div class="menu-divider"></div>
+                  <button id="canvas-dropdown-btn-open" class="dropdown-item" type="button">
+                    <svg class="dropdown-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+                    </svg>
+                    <span>Open Local Folder / Git Repository...</span>
+                    <span class="menu-shortcut">Ctrl+O</span>
+                  </button>
+                  <button id="canvas-dropdown-btn-init" class="dropdown-item" type="button">
+                    <svg class="dropdown-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <line x1="12" y1="5" x2="12" y2="19"></line>
+                      <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg>
+                    <span>Initialize New Git Repository Here...</span>
+                  </button>
+                </div>
+              </div>
+
+              <div class="branch-picker-wrapper">
+                <button id="btn-canvas-branch-select" class="context-pill" type="button" title="Switch Branch">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="6" y1="3" x2="6" y2="15"></line>
+                    <circle cx="18" cy="6" r="3"></circle>
+                    <circle cx="6" cy="18" r="3"></circle>
+                    <path d="M18 9a9 9 0 0 1-9 9"></path>
+                  </svg>
+                  <span id="canvas-branch-label">main</span>
+                  <svg class="chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </button>
+
+                <!-- Branch Picker Dropdown -->
+                <div id="branch-picker-dropdown" class="branch-picker-dropdown hidden">
+                  <div class="dropdown-header">Switch Git Branch</div>
+                  <div id="branch-list-container" class="branch-list-container">
+                    <!-- Dynamically populated branch list -->
+                  </div>
+                </div>
+              </div>
+
+              <span id="drawer-mode-indicator" class="hidden"></span>
+            </div>
+
+            <!-- Model Selector Dropdown -->
+            <div class="model-picker-wrapper">
+              <button id="btn-canvas-model-select" class="model-selector-btn" type="button" title="Select Model">
+                <span id="canvas-model-label">Gemini 3.1 Pro</span>
+                <svg class="chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+              <div id="model-picker-dropdown" class="model-picker-dropdown hidden">
+                <div class="dropdown-header">Execution Engine &amp; Model</div>
+
+                <!-- Gemini CLI Group -->
+                <div class="model-engine-group">
+                  <div class="model-engine-header">
+                    <span class="engine-title">Gemini CLI (Default)</span>
+                    <span class="engine-badge engine-badge-ready" id="badge-engine-gemini-cli">Ready</span>
+                  </div>
+                  <button class="model-option active" data-engine="gemini-cli" data-model="gemini-3.1-pro" type="button">
+                    <div class="model-info">
+                      <span class="model-name">Gemini 3.1 Pro</span>
+                      <span class="model-desc">Default • Best for complex local tasks</span>
+                    </div>
+                    <span class="check-mark">✓</span>
+                  </button>
+                  <button class="model-option" data-engine="gemini-cli" data-model="gemini-3.6-flash" type="button">
+                    <div class="model-info">
+                      <span class="model-name">Gemini 3.6 Flash</span>
+                      <span class="model-desc">Fast • Low latency iterations</span>
+                    </div>
+                  </button>
+                  <button class="model-option" data-engine="gemini-cli" data-model="gemini-2.5-pro" type="button">
+                    <div class="model-info">
+                      <span class="model-name">Gemini 2.5 Pro</span>
+                      <span class="model-desc">High fidelity code generation</span>
+                    </div>
+                  </button>
+                </div>
+
+                <div class="menu-divider"></div>
+
+                <!-- Claude Code Group -->
+                <div class="model-engine-group">
+                  <div class="model-engine-header">
+                    <span class="engine-title">Claude Code</span>
+                    <span class="engine-badge" id="badge-engine-claude-code">Checking...</span>
+                  </div>
+                  <button class="model-option" data-engine="claude-code" data-model="claude-sonnet-4-6" type="button">
+                    <div class="model-info">
+                      <span class="model-name">Claude Sonnet 4.6</span>
+                      <span class="model-desc">Anthropic flagship agentic coding</span>
+                    </div>
+                  </button>
+                  <button class="model-option" data-engine="claude-code" data-model="claude-opus-4-7" type="button">
+                    <div class="model-info">
+                      <span class="model-name">Claude Opus 4.7</span>
+                      <span class="model-desc">Maximum capability &amp; architecture reasoning</span>
+                    </div>
+                  </button>
+                </div>
+
+                <div class="menu-divider"></div>
+
+                <!-- OpenAI Codex Group -->
+                <div class="model-engine-group">
+                  <div class="model-engine-header">
+                    <span class="engine-title">OpenAI Codex</span>
+                    <span class="engine-badge" id="badge-engine-codex">Checking...</span>
+                  </div>
+                  <button class="model-option" data-engine="codex" data-model="gpt-5-codex" type="button">
+                    <div class="model-info">
+                      <span class="model-name">GPT-5 Codex</span>
+                      <span class="model-desc">OpenAI deep codebase reasoning</span>
+                    </div>
+                  </button>
+                </div>
+
+                <div class="menu-divider"></div>
+
+                <!-- OpenCode Group -->
+                <div class="model-engine-group">
+                  <div class="model-engine-header">
+                    <span class="engine-title">OpenCode</span>
+                    <span class="engine-badge" id="badge-engine-opencode">Checking...</span>
+                  </div>
+                  <button class="model-option" data-engine="opencode" data-model="opencode-default" type="button">
+                    <div class="model-info">
+                      <span class="model-name">OpenCode Agent</span>
+                      <span class="model-desc">Multi-provider open coding engine</span>
+                    </div>
+                  </button>
+                </div>
+
+                <div class="menu-divider"></div>
+
+                <!-- Aider Group -->
+                <div class="model-engine-group">
+                  <div class="model-engine-header">
+                    <span class="engine-title">Aider</span>
+                    <span class="engine-badge" id="badge-engine-aider">Checking...</span>
+                  </div>
+                  <button class="model-option" data-engine="aider" data-model="aider-default" type="button">
+                    <div class="model-info">
+                      <span class="model-name">Aider Architect</span>
+                      <span class="model-desc">Git-paired terminal coding specialist</span>
+                    </div>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="canvas-navbar-right">
+            <!-- Add New Session Button (+ icon) -->
+            <button id="btn-navbar-new-session" class="btn-navbar-new-session" type="button" title="New Session">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+            </button>
+
+            <!-- Light Mode / Dark Mode Toggle Button (sun icon) -->
+            <button id="btn-jules-theme-toggle" class="btn-icon jules-nav-icon" type="button" title="Toggle Light/Dark Theme">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+              </svg>
+            </button>
+
+            <!-- Updates / What's New Button (gift icon) -->
+            <button id="btn-jules-updates" class="btn-icon jules-nav-icon" type="button" title="Updates">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 12 20 22 4 22 4 12"></polyline>
+                <rect x="2" y="7" width="20" height="5"></rect>
+                <line x1="12" y1="22" x2="12" y2="7"></line>
+                <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
+                <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
+              </svg>
+            </button>
+
+            <!-- Feedback Button -->
+            <button id="btn-jules-feedback" class="btn-jules-feedback" type="button" title="Send Feedback">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+              </svg>
+              <span>Feedback</span>
+            </button>
+
+            <!-- Settings Gear Button -->
+            <button id="btn-jules-settings" class="btn-icon jules-nav-icon" type="button" title="Jules Settings">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="3"></circle>
+                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+              </svg>
+            </button>
+
+            <!-- User Pro Profile Pill -->
+            <div class="jules-pro-profile-pill" id="jules-pro-profile-pill" title="Google Account (Pro)">
+              <span class="pro-tag">PRO</span>
+              <div class="profile-avatar">
+                <span>O</span>
+              </div>
+            </div>
+
+            <span id="task-status-badge" class="task-status-pill status-idle">Idle</span>
+            <button id="btn-refresh-git" class="btn-icon" title="Refresh Git Working Tree & Commits">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M23 4v6h-6M1 20v-6h6M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+              </svg>
+            </button>
+            <button id="btn-toggle-inspector" class="btn-icon active" title="Toggle Code & Git Inspector Panel">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="15" y1="3" x2="15" y2="21"></line>
+              </svg>
+            </button>
+            <button id="btn-close-drawer" class="btn-icon" title="Return to Cloud Jules (Esc)">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+          </div>
+        </header>
+
+        <!-- Main Chat Canvas Stream & Creation View Container -->
+        <div class="canvas-stream-container" id="canvas-stream-container">
+          <!-- Center Home Stage (swebot-task-creation-view inside #local-empty-state) -->
+          <div id="local-empty-state" class="local-empty-state swebot-task-creation-view">
+            <!-- Top Repo Bar (#jules-repo-context-bar) -->
+            <div class="jules-repo-context-bar" id="jules-repo-context-bar">
+              <div class="repo-combobox-wrapper">
+                <button id="btn-jules-repo-dropdown" class="btn-jules-repo-dropdown" type="button" aria-haspopup="listbox" aria-expanded="false" title="Choose repository">
+                  <svg class="gh-repo-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                  </svg>
+                  <span class="repo-name-text" id="jules-repo-dropdown-label">OSINTCabal/DeepSearch</span>
+                  <svg class="chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </button>
+                <!-- Repo Dropdown Menu Popover -->
+                <div id="jules-repo-dropdown-menu" class="jules-repo-dropdown-menu hidden" role="listbox">
+                  <div class="repo-filter-wrapper">
+                    <input type="text" id="jules-repo-filter-input" placeholder="🔍 Choose a repo" />
+                  </div>
+                  <div id="jules-repo-dropdown-list" class="jules-repo-dropdown-list">
+                    <div class="repo-list-item active" data-repo="OSINTCabal/DeepSearch">
+                      <span class="repo-title">OSINTCabal/DeepSearch</span>
+                      <span class="check-mark">✓</span>
+                    </div>
+                  </div>
+                  <div class="menu-divider"></div>
+                  <button id="btn-configure-repo-access" class="dropdown-item" type="button">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="12" r="3"></circle>
+                      <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                    </svg>
+                    <span>Configure repo access</span>
+                  </button>
+                  <button id="btn-detach-repo" class="dropdown-item dropdown-item-danger" type="button">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <line x1="18" y1="6" x2="6" y2="18"></line>
+                      <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                    <span>Detach repo</span>
+                  </button>
+                </div>
+              </div>
+              <button id="btn-configure-repo-top" class="btn-configure-repo-top" type="button" title="Configure repository settings">
+                <span>Configure repo ⚙️</span>
+              </button>
+            </div>
+
+            <!-- Empty / Welcome state Hero Header -->
+            <div class="hero-brand">
+              <div class="hero-gem-wrapper">
+                <svg class="jules-gem-icon" width="48" height="48" viewBox="0 0 24 24" fill="none">
+                  <path d="M12 2L14.85 9.15L22 12L14.85 14.85L12 22L9.15 14.85L2 12L9.15 9.15L12 2Z" fill="url(#hero-gem-gradient)"/>
+                  <circle cx="12" cy="12" r="1.8" fill="#ffffff" fill-opacity="0.85"/>
+                </svg>
+              </div>
+              <h1 class="hero-title"><span id="hero-title-kicker" class="hero-title-kicker">Jules Local</span> <span id="hero-mode-pill" class="hero-mode-pill hidden">GitHub Repo Mode</span> <span id="hero-title-sub" class="hero-title-sub">Meet Jules, your local software engineer</span></h1>
+              <p id="hero-subtitle" class="hero-subtitle">What would you like Jules to work on?</p>
+            </div>
+
+            <!-- Outer 24px Container Card (#jules-outer-creation-card) -->
+            <div class="jules-outer-creation-card" id="jules-outer-creation-card">
+              <!-- Centered Task Composer Card (#local-composer-box) -->
+              <div class="composer-card" id="local-composer-box" style="width: 100%; max-width: 680px; margin: 4px auto 20px auto; text-align: left;">
+                <textarea id="jules-task-prompt" class="task-textarea" placeholder="Describe a task for Jules to make changes to your local codebase or repository..."></textarea>
+                <div class="composer-action-bar">
+                  <div class="composer-context-tags">
+                    <button id="btn-add-context" class="btn-composer-context" type="button" title="Add context">
+                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                      </svg>
+                      <span>Add context</span>
+                    </button>
+                    <span id="composer-repo-chip" class="context-tag" title="Switch local repository">
+                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+                      </svg>
+                      <span id="composer-repo-text">No Repo</span>
+                    </span>
+                    <span id="composer-branch-chip" class="context-tag" title="Switch Git branch">
+                      <span id="composer-branch-text">main</span>
+                    </span>
+                    <button id="btn-plan-mode-select" class="btn-plan-mode-select context-tag" type="button" title="Select plan review mode">
+                      <span>📄 Review ⌄</span>
+                    </button>
+                  </div>
+                  <div class="composer-buttons">
+                    <button id="btn-run-jules" class="btn-send-task btn-send-task-labeled" title="Give me a plan for this task (Enter)" type="button" aria-label="Give me a plan" data-label="Give me a plan">
+                      <svg class="sparkle-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="12" y1="19" x2="12" y2="5"></line>
+                        <polyline points="5 12 12 5 19 12"></polyline>
+                      </svg>
+                      <span class="btn-plan-label">Give me a plan</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Three Pill Tabs (#jules-home-tabs) -->
+              <div class="jules-home-tabs" id="jules-home-tabs" role="tablist">
+                <button class="jules-home-tab active" data-tab="overview" type="button" role="tab" aria-selected="true">Codebase overview</button>
+                <button class="jules-home-tab" data-tab="suggested" type="button" role="tab" aria-selected="false">Suggested</button>
+                <button class="jules-home-tab" data-tab="scheduled" type="button" role="tab" aria-selected="false">Scheduled</button>
+              </div>
+
+              <!-- Tab Content: Codebase Overview (#jules-tab-overview) -->
+              <div class="jules-tab-content jules-tab-overview" id="jules-tab-overview">
+                <!-- Proactive Banner Row -->
+                <div class="proactive-banner-row">
+                  <div class="banner-label-group">
+                    <span class="banner-icon">💡</span>
+                    <span class="banner-text">Automatically find issues in your codebase</span>
+                    <span class="info-pill" title="Jules will periodically inspect code and recommend enhancements">ⓘ</span>
+                  </div>
+                  <label class="toggle-switch">
+                    <input type="checkbox" id="toggle-auto-find-issues" />
+                    <span class="slider round"></span>
+                  </label>
+                </div>
+
+                <!-- Sessions Card (#jules-overview-sessions-card) -->
+                <div class="jules-overview-sessions-card" id="jules-overview-sessions-card">
+                  <div class="sessions-card-header">
+                    <span class="sessions-card-icon">☑️</span>
+                    <span class="sessions-card-title">Sessions</span>
+                  </div>
+                  <div class="overview-sessions-list">
+                    <div class="overview-session-item">
+                      <span class="session-check">✓</span>
+                      <span class="session-title">Fix login redirect loop on expired sessions</span>
+                      <span class="session-time">2h ago</span>
+                    </div>
+                    <div class="overview-session-item">
+                      <span class="session-check">✓</span>
+                      <span class="session-title">Optimize database queries in user service</span>
+                      <span class="session-time">Yesterday</span>
+                    </div>
+                  </div>
+                  <button class="btn-overview-view-more" type="button">View more</button>
+                </div>
+
+                <!-- Skill Agents Row -->
+                <div class="skill-agents-row">
+                  <div class="skill-agents-label">
+                    <span class="clock-icon">🕒</span>
+                    <span>Schedule skill-based agents</span>
+                  </div>
+                  <div class="skill-pill-buttons">
+                    <button id="btn-skill-perf" class="skill-pill-btn" type="button">⚡ Performance</button>
+                    <button id="btn-skill-design" class="skill-pill-btn" type="button">🎨 Design</button>
+                    <button id="btn-skill-sec" class="skill-pill-btn" type="button">🛡️ Security</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Tab Content: Suggested (#jules-tab-suggested) -->
+              <div class="jules-tab-content jules-tab-suggested hidden" id="jules-tab-suggested">
+                <div class="proactive-suggested-card">
+                  <div class="suggested-card-header">
+                    <div class="suggested-header-left">
+                      <span class="suggested-icon">✨</span>
+                      <span class="suggested-title">Enable proactive suggestions on this repo</span>
+                    </div>
+                    <label class="toggle-switch">
+                      <input type="checkbox" id="toggle-proactive-suggestions" checked />
+                      <span class="slider round"></span>
+                    </label>
+                  </div>
+                  <p class="suggested-description">Jules analyzes recent commits and dependencies to propose performance, style, and security improvements.</p>
+                </div>
+              </div>
+
+              <!-- Tab Content: Scheduled (#jules-tab-scheduled) -->
+              <div class="jules-tab-content jules-tab-scheduled hidden" id="jules-tab-scheduled">
+                <div class="scheduled-agents-card">
+                  <div class="scheduled-card-header">
+                    <span class="scheduled-icon">🕒</span>
+                    <span class="scheduled-title">Scheduled Skill Agents</span>
+                  </div>
+                  <p class="scheduled-description">Run automated code health and security checks on a recurring schedule.</p>
+                  <div class="scheduled-agent-list">
+                    <div class="scheduled-agent-item">
+                      <div class="agent-info">
+                        <span class="agent-badge">🛡️ Security Audit</span>
+                        <span class="agent-frequency">Weekly • Sundays at 02:00</span>
+                      </div>
+                      <span class="agent-status-pill active">Enabled</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Starter suggestion chips -->
+            <div class="empty-starter-chips">
+              <button class="starter-chip" data-prompt="Run test suite and fix any failing tests" type="button">
+                <div class="starter-chip-icon">🧪</div>
+                <div class="starter-chip-content">
+                  <span class="starter-chip-title">Run test suite</span>
+                  <span class="starter-chip-desc">Execute test runner and fix broken assertions</span>
+                </div>
+              </button>
+              <button class="starter-chip" data-prompt="Inspect git status and explain working tree changes" type="button">
+                <div class="starter-chip-icon">🔍</div>
+                <div class="starter-chip-content">
+                  <span class="starter-chip-title">Explain working tree changes</span>
+                  <span class="starter-chip-desc">Analyze unstaged diffs and explain recent edits</span>
+                </div>
+              </button>
+              <button class="starter-chip" data-prompt="Refactor code for clarity and improve testability in recent files" type="button">
+                <div class="starter-chip-icon">✨</div>
+                <div class="starter-chip-content">
+                  <span class="starter-chip-title">Refactor code for clarity</span>
+                  <span class="starter-chip-desc">Clean up syntax and improve testability</span>
+                </div>
+              </button>
+              <button class="starter-chip" data-prompt="Security &amp; edge case audit: audit codebase for security, edge cases, and error handling" type="button">
+                <div class="starter-chip-icon">🛡️</div>
+                <div class="starter-chip-content">
+                  <span class="starter-chip-title">Security &amp; edge case audit</span>
+                  <span class="starter-chip-desc">Identify memory leaks and boundary bugs</span>
+                </div>
+              </button>
+            </div>
+
+            <!-- Below-card Integrate Section (#jules-extend-section) -->
+            <div class="jules-extend-section" id="jules-extend-section">
+              <div class="extend-left">
+                <span class="extend-arrow">↳</span>
+                <span class="extend-title">Integrate Jules</span>
+              </div>
+              <div class="extend-buttons">
+                <button id="btn-jules-render" class="btn-extend-action" type="button">Configure Render</button>
+                <button id="btn-jules-cli" class="btn-extend-action" type="button">Download CLI</button>
+                <button id="btn-jules-api" class="btn-extend-action" type="button">Try API</button>
+              </div>
+            </div>
+
+            <div class="empty-state-actions">
+              <button id="btn-empty-select-repo" class="btn-primary btn-empty-cta" type="button">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+                </svg>
+                <span>Choose Local Repository...</span>
+              </button>
+              <button id="btn-empty-init-repo" class="btn-secondary btn-empty-cta" type="button">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                <span>Initialize Git Here...</span>
+              </button>
+            </div>
+
+            <div class="hero-context-badge">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+              </svg>
+              <span id="drawer-repo-title" class="hero-repo-title">Local Jules Workspace</span>
+              <span class="hero-context-divider">•</span>
+              <span id="drawer-repo-meta" class="hero-repo-meta">No repository connected</span>
+            </div>
+
+            <!-- Page Footer (#jules-page-footer) -->
+            <footer class="jules-page-footer" id="jules-page-footer">
+              <div class="page-footer-links">
+                <a href="https://policies.google.com/terms" target="_blank" class="footer-link">Terms</a>
+                <a href="#" class="footer-link">Open source licenses</a>
+                <span class="footer-caution">Use code with caution</span>
+              </div>
+            </footer>
+          </div>
+
+          <!-- Active Session View (swebot-task-view) -->
+          <div class="swebot-task-view" id="swebot-task-view">
+            <!-- Session Sub-header (#jules-session-subheader) -->
+            <div class="jules-session-subheader" id="jules-session-subheader">
+              <div class="session-subheader-left">
+                <button id="btn-session-back-home" class="btn-icon btn-session-back-home" title="Back to Task Creation" type="button">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                  </svg>
+                </button>
+                <span id="jules-active-session-title" class="jules-active-session-title">Session: DeepSearch Core Implementation</span>
+              </div>
+              <div class="session-subheader-right">
+                <button id="btn-session-pause" class="btn-session-action" type="button" title="Pause session">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="6" y="4" width="4" height="16"></rect>
+                    <rect x="14" y="4" width="4" height="16"></rect>
+                  </svg>
+                  <span>Pause session</span>
+                </button>
+                <button id="btn-session-toggle-code" class="btn-session-action active" type="button" title="Toggle Code Panel">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="16 18 22 12 16 6"></polyline>
+                    <polyline points="8 6 2 12 8 18"></polyline>
+                  </svg>
+                  <span>Code</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Active Chat Stream (Conversational Stream & Structured Plan Card Container) -->
+            <div id="local-chat-stream" class="local-chat-stream hidden">
+              <!-- Timestamp divider -->
+              <div class="chat-timestamp-divider">
+                <span class="chat-timestamp-pill">Today</span>
+              </div>
+              <!-- User turn bubble -->
+              <div class="chat-turn-user">
+                <div class="user-bubble">
+                  <div class="user-bubble-content">Refactor user authentication to support multi-account sessions</div>
+                </div>
+              </div>
+              <!-- Agent turn with White Jules Octopus Mascot SVG and plan card -->
+              <div class="chat-turn-assistant">
+                <div class="assistant-avatar-wrap">
+                  <svg class="jules-octopus-avatar-white" width="22" height="25" viewBox="0 0 84 95" fill="none">
+                    <path d="M41.824 4.80334C55.2044 4.80334 66.0631 15.6622 66.0632 29.0426C66.0632 29.7486 66.0299 30.4552 65.9626 31.1276C65.9963 31.4636 66.0632 31.7999 66.0632 32.1696V51.6354C66.0632 52.7782 65.7946 53.8539 65.324 54.8287V74.4957C65.324 76.6137 67.0722 78.3619 69.1902 78.3619C71.2421 78.3619 72.9471 76.7212 73.0515 74.693L73.0613 74.2985C73.1659 72.2704 74.8708 70.6295 76.9226 70.6295C79.0405 70.6296 80.7886 72.3443 80.7888 74.4957C80.7888 80.6143 76.0149 85.5898 69.9636 86.027C69.7283 86.0606 69.4591 86.0944 69.1902 86.0944C68.9212 86.0944 68.6857 86.0942 68.4167 86.027C62.399 85.6235 57.5916 80.648 57.5916 74.4957V59.0309H52.4138V74.3619C52.4136 76.4798 50.6991 78.2281 48.5476 78.2281C46.4298 78.228 44.6816 76.5133 44.6814 74.3619V59.0309H39.5046V74.3619C39.5044 76.4797 37.7898 78.228 35.6384 78.2281C33.5205 78.2281 31.7724 76.5134 31.7722 74.3619V59.0309H26.5945V74.4957C26.5945 80.6143 21.787 85.6234 15.7693 86.027C15.534 86.0606 15.2648 86.0944 14.9958 86.0944C14.7269 86.0944 14.4913 86.0942 14.2224 86.027C8.20468 85.6234 3.39722 80.648 3.39722 74.4957C3.3974 72.3779 5.14552 70.6295 7.26343 70.6295C9.38133 70.6295 11.1295 72.3443 11.1296 74.4957C11.1296 76.6137 12.8779 78.3619 14.9958 78.3619C17.1139 78.3619 18.8621 76.6137 18.8621 74.4957V55.8033C18.0554 54.6268 17.5848 53.1816 17.5847 51.6354V32.1696C17.5847 31.7999 17.6517 31.4636 17.6853 31.1276C17.6181 30.4216 17.5847 29.7486 17.5847 29.0426C17.5848 15.6623 28.4436 4.80336 41.824 4.80334ZM29.1833 38.9938C27.0481 38.9938 25.3171 41.1619 25.3171 43.8356C25.3173 46.5091 27.0482 48.6764 29.1833 48.6764C31.3184 48.6763 33.0494 46.509 33.0496 43.8356C33.0496 41.1619 31.3185 38.9939 29.1833 38.9938ZM55.0027 38.9938C52.8675 38.9938 51.1365 41.1619 51.1365 43.8356C51.1366 46.5091 52.8676 48.6763 55.0027 48.6764C57.1378 48.6764 58.8687 46.5091 58.8689 43.8356C58.8689 41.1619 57.1379 38.9938 55.0027 38.9938Z" fill="#ffffff"/>
+                  </svg>
+                </div>
+                <div class="assistant-bubble">
+                  <div class="assistant-response-text">
+                    <p>I've analyzed the codebase and prepared an implementation plan.</p>
+                  </div>
+                  <div class="jules-plan-card">
+                    <div class="plan-card-header">
+                      <span class="plan-card-kicker">Jules Plan</span>
+                      <span class="plan-card-title">Plan for codebase modification</span>
+                    </div>
+                    <ol class="plan-steps">
+                      <li class="plan-step plan-step-completed" data-step-index="0">
+                        <span class="plan-step-marker">✓</span>
+                        <span class="plan-step-label">Analyze codebase structure and dependencies</span>
+                      </li>
+                      <li class="plan-step plan-step-running" data-step-index="1">
+                        <span class="plan-step-marker">2</span>
+                        <span class="plan-step-label">Plan code modifications and edge case validation</span>
+                      </li>
+                      <li class="plan-step plan-step-pending" data-step-index="2">
+                        <span class="plan-step-marker">3</span>
+                        <span class="plan-step-label">Execute changes in local repository</span>
+                      </li>
+                      <li class="plan-step plan-step-pending" data-step-index="3">
+                        <span class="plan-step-marker">4</span>
+                        <span class="plan-step-label">Run test suite and verify working tree</span>
+                      </li>
+                    </ol>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Bottom Wavy Lines & Follow-up bar (#jules-bottom-talk-bar) -->
+            <div class="jules-bottom-talk-bar" id="jules-bottom-talk-bar">
+              <div class="wavy-line-container">
+                <div class="wavy-line"></div>
+                <div class="wavy-line"></div>
+                <div class="wavy-line"></div>
+                <div class="wavy-line"></div>
+                <div class="wavy-line"></div>
+                <div class="wavy-line"></div>
+                <div class="wavy-line"></div>
+                <div class="wavy-line"></div>
+                <div class="wavy-line"></div>
+                <div class="wavy-line"></div>
+                <div class="wavy-line"></div>
+              </div>
+              <form id="jules-talk-form" class="jules-talk-form" onsubmit="return false;">
+                <div class="talk-form-box">
+                  <textarea id="jules-followup-input" class="jules-followup-input" placeholder="Talk to Jules" rows="1"></textarea>
+                  <div class="talk-form-actions">
+                    <button id="btn-upload-photo" class="btn-talk-action btn-upload-photo" type="button" title="Upload screenshot or photo">
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                        <polyline points="21 15 16 10 5 21"></polyline>
+                      </svg>
+                    </button>
+                    <button id="btn-send-followup" class="btn-talk-action btn-send-followup" type="submit" title="Send message to Jules">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="12" y1="19" x2="12" y2="5"></line>
+                        <polyline points="5 12 12 5 19 12"></polyline>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+                <div class="talk-form-disclaimer">
+                  <span>Jules can make mistakes so double-check it and use code with caution</span>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- Template & Structure for Multi-step Plan Card -->
+          <template id="plan-card-template">
+            <div class="chat-message chat-assistant">
+              <div class="message-avatar assistant-avatar">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                  <path d="M12 2L14.85 9.15L22 12L14.85 14.85L12 22L9.15 14.85L2 12L9.15 9.15L12 2Z" fill="url(#hero-gem-gradient)"/>
+                  <circle cx="12" cy="12" r="1.5" fill="#ffffff" fill-opacity="0.9"/>
+                </svg>
+              </div>
+              <div class="message-bubble assistant-bubble">
+                <div class="assistant-header">
+                  <span class="assistant-name">Jules</span>
+                  <span class="assistant-model-pill">Gemini 3.1 Pro</span>
+                </div>
+                <div class="assistant-body">
+                  <div class="assistant-status-box">
+                    <span class="terminal-pulse-dot"></span>
+                    <span class="assistant-status-label">Plan ready — review the steps, then approve to execute.</span>
+                  </div>
+                  <div class="jules-plan-card">
+                    <div class="plan-card-header">
+                      <span class="plan-card-kicker">Jules Plan</span>
+                      <span class="plan-card-title">Plan for &lt;task&gt; <!-- Plan for <task> --></span>
+                    </div>
+                    <ol class="plan-steps">
+                      <li class="plan-step plan-step-pending" data-step-index="0">
+                        <span class="plan-step-marker">1</span>
+                        <span class="plan-step-label">Analyze codebase structure and dependencies</span>
+                      </li>
+                      <li class="plan-step plan-step-pending" data-step-index="1">
+                        <span class="plan-step-marker">2</span>
+                        <span class="plan-step-label">Plan code modifications and edge case validation</span>
+                      </li>
+                      <li class="plan-step plan-step-pending" data-step-index="2">
+                        <span class="plan-step-marker">3</span>
+                        <span class="plan-step-label">Execute changes in local repository</span>
+                      </li>
+                      <li class="plan-step plan-step-pending" data-step-index="3">
+                        <span class="plan-step-marker">4</span>
+                        <span class="plan-step-label">Run test suite and verify working tree</span>
+                      </li>
+                    </ol>
+                    <div class="plan-actions">
+                      <button class="plan-action-btn plan-action-approve" type="button">Approve &amp; Execute Plan</button>
+                      <button class="plan-action-btn plan-action-changes" type="button">Ask for Changes</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </template>
+
+          <!-- Live Terminal Output Container (Collapsible Execution Stream, hidden on idle) -->
+          <div class="terminal-container hidden" id="terminal-container">
+            <div class="terminal-toolbar" id="terminal-toolbar">
+              <div class="terminal-toolbar-left">
+                <button id="btn-toggle-terminal-body" class="terminal-collapse-btn" title="Collapse / Expand Terminal Output" type="button">
+                  <svg id="icon-terminal-toggle" class="terminal-toggle-icon" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </button>
+                <span class="terminal-title">CLI Execution Stream</span>
+                <span id="terminal-session-pill" class="session-detected-pill hidden" title="Detected Google Jules Session ID"></span>
+                <span id="terminal-live-status" class="terminal-live-pill hidden">
+                  <span class="terminal-pulse-dot"></span> Streaming
+                </span>
+              </div>
+              <div class="terminal-toolbar-right">
+                <button id="btn-clear-terminal" class="terminal-btn" title="Clear output" type="button">Clear</button>
+                <button id="btn-cancel-task" class="terminal-btn btn-cancel-task hidden" title="Cancel running task" type="button">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor">
+                    <rect x="4" y="4" width="16" height="16" rx="2"></rect>
+                  </svg>
+                  <span>Stop</span>
+                </button>
+              </div>
+            </div>
+            <div id="jules-terminal-output" class="terminal-output-body"></div>
+          </div>
+
+          <!-- Composer Dock Container (contextual composer overlay slot) -->
+          <div id="local-chat-composer-dock" class="local-chat-composer-dock hidden"></div>
+        </div>
+      </main>
+
+      <!-- 3. RIGHT PANEL: Review Changes, Diff Viewer & Commits -->
+      <aside class="workspace-inspector" id="workspace-inspector">
+        <!-- Changes Header -->
+        <div class="inspector-section">
+          <div class="inspector-section-header">
+            <span class="section-label">Review Changes</span>
+            <span id="git-status-summary" class="git-status-summary-pill">0 changes</span>
+          </div>
+          <div id="git-status-content" class="git-status-content">
+            <span class="text-muted">Analyzing working tree...</span>
+          </div>
+
+          <!-- Inline Unified Diff Viewer -->
+          <div id="git-diff-viewer" class="git-diff-viewer hidden">
+            <div class="diff-viewer-header">
+              <span id="diff-file-title" class="diff-file-title">File Diff</span>
+              <span id="diff-file-stats" class="diff-file-stats hidden"></span>
+              <button id="btn-close-diff" class="diff-close-btn" title="Back to file list">Back to List</button>
+            </div>
+            <pre id="diff-content-body" class="diff-content-body"></pre>
+          </div>
+        </div>
+
+        <!-- Quick Commit Bar -->
+        <div class="inspector-section commit-section">
+          <div class="inspector-section-header">
+            <span class="section-label">Quick Commit</span>
+          </div>
+          <div class="commit-box">
+            <input type="text" id="input-commit-msg" class="commit-input" placeholder="Commit message (e.g. fix: update login)" />
+            <button id="btn-git-commit" class="btn-commit" type="button" disabled>Stage &amp; Commit</button>
+          </div>
+        </div>
+
+        <!-- GitHub Branch & Pull Request Publisher Section -->
+        <div class="inspector-section github-pr-publisher-section" id="github-pr-publisher-section">
+          <div class="inspector-section-header">
+            <span class="section-label">GitHub Pull Request</span>
+            <span id="pr-status-badge" class="pr-status-badge">Ready</span>
+          </div>
+          <div class="pr-branch-flow">
+            <span id="pr-task-branch-badge" class="branch-pill task-branch-pill">jules/task-branch</span>
+            <span class="branch-flow-arrow">→</span>
+            <span id="pr-base-branch-badge" class="branch-pill base-branch-pill">main</span>
+          </div>
+          <div class="pr-form-box">
+            <input type="text" id="input-pr-title" class="pr-input" placeholder="Pull Request title (e.g. feat: implement standalone mode)" />
+            <textarea id="input-pr-body" class="pr-textarea" placeholder="Summary of changes for GitHub Pull Request..." rows="3"></textarea>
+            <div class="pr-actions-row">
+              <button id="btn-publish-branch" class="btn-pr-action btn-secondary" type="button">Publish Branch</button>
+              <button id="btn-publish-pr" class="btn-pr-action btn-primary" type="button">Create Pull Request</button>
+            </div>
+            <div id="pr-result-banner" class="pr-result-banner hidden">
+              <span id="pr-result-icon">🎉</span>
+              <div class="pr-result-text">
+                <span id="pr-result-message">PR created successfully!</span>
+                <a id="pr-result-link" href="#" target="_blank" class="pr-link">View Pull Request on GitHub ↗</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Commits -->
+        <div class="inspector-section commits-history-section">
+          <div class="inspector-section-header">
+            <span class="section-label">Recent Commits</span>
+          </div>
+          <div id="git-commits-content" class="git-commits-content">
+            <span class="text-muted">Loading commits...</span>
+          </div>
+        </div>
+
+        <!-- Footer Utility Actions -->
+        <div class="inspector-footer" id="drawer-footer">
+          <button id="btn-copy-slug" class="btn-action" title="Copy GitHub owner/repo to clipboard" type="button">
+            <span id="copy-slug-label">Copy Slug</span>
+          </button>
+          <button id="btn-open-folder" class="btn-action" title="Open repository in file explorer" type="button">
+            <span>Folder</span>
+          </button>
+          <button id="btn-change-repo" class="btn-action" title="Choose another local repository" type="button">
+            <span>Change...</span>
+          </button>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <!-- Add Account Modal Dialog -->
+  <div id="add-account-modal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="modal-account-title">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <span id="modal-account-title" class="modal-title">Add Google Account</span>
+        <button id="btn-close-account-modal" class="btn-icon" title="Close (Esc)">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <label class="modal-label" for="input-account-name">Account Label (Optional)</label>
+        <input type="text" id="input-account-name" class="modal-input" placeholder="e.g. Work Profile, Research" />
+        <p class="modal-hint">A new isolated Google session partition will be created for this account.</p>
+      </div>
+      <div class="modal-footer">
+        <button id="btn-cancel-account-modal" class="btn-secondary" type="button">Cancel</button>
+        <button id="btn-confirm-add-account" class="btn-primary" type="button">Add &amp; Sign In</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="chrome.js"></script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+#!/usr/bin/env bash
+# JulesDeck user-level launcher
+set -euo pipefail
+
+# Dynamically augment PATH with $HOME/.local/bin and existing NVM Node versions (newest first)
+NVM_PATH_PREFIX=""
+if [ -d "$HOME/.nvm/versions/node" ]; then
+  while IFS= read -r dir; do
+    if [ -d "$dir/bin" ]; then
+      case ":$PATH:" in
+        *":$dir/bin:"*) ;;
+        *) NVM_PATH_PREFIX="${NVM_PATH_PREFIX:+$NVM_PATH_PREFIX:}$dir/bin" ;;
+      esac
+    fi
+  done < <(find "$HOME/.nvm/versions/node" -mindepth 1 -maxdepth 1 -type d 2>/dev/null | sort -Vr)
+fi
+if [ -n "$NVM_PATH_PREFIX" ]; then
+  PATH="$NVM_PATH_PREFIX:$PATH"
+fi
+
+if [ -d "$HOME/.local/bin" ]; then
+  case ":$PATH:" in
+    *":$HOME/.local/bin:"*) ;;
+    *) PATH="$HOME/.local/bin:$PATH" ;;
+  esac
+fi
+export PATH
+
+# Source user environment configuration if present
+ENV_FILE="${XDG_CONFIG_HOME:-$HOME/.config}/julesdeck/env"
+if [ -f "$ENV_FILE" ]; then
+  # shellcheck source=/dev/null
+  . "$ENV_FILE"
+fi
+
+APP_DIR="${JULESDECK_HOME:-${XDG_DATA_HOME:-$HOME/.local/share}/julesdeck}"
+
+# Fallback: if $APP_DIR/dist/main/index.js does not exist, fall back to the source repository checkout
+# if launched directly from packaging/bin/julesdeck
+if [ ! -f "$APP_DIR/dist/main/index.js" ]; then
+  SCRIPT_PATH="$(readlink -f "$0" 2>/dev/null || realpath "$0" 2>/dev/null || echo "$0")"
+  SCRIPT_DIR="$(cd "$(dirname "$SCRIPT_PATH")" && pwd)"
+  REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
+  if [ -f "$REPO_ROOT/dist/main/index.js" ]; then
+    APP_DIR="$REPO_ROOT"
+  elif [ -f "$REPO_ROOT/package.json" ]; then
+    APP_DIR="$REPO_ROOT"
+  fi
+fi
+
+# Set Electron Ozone platform hint for reliable frameless window geometry
+export ELECTRON_OZONE_PLATFORM_HINT="${ELECTRON_OZONE_PLATFORM_HINT:-x11}"
+
+if [ ! -d "$APP_DIR" ]; then
+  echo "JulesDeck: application directory not found at $APP_DIR. Run packaging/install.sh first." >&2
+  exit 1
+fi
+
+# Execute Electron
+if [ -x "$APP_DIR/node_modules/electron/dist/electron" ]; then
+  exec "$APP_DIR/node_modules/electron/dist/electron" "$APP_DIR" "$@"
+else
+  cd "$APP_DIR" && exec npx electron . "$@"
+fi

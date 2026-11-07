@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=JulesDeck
+GenericName=Google Jules Desktop Client
+Comment=Google Jules Cloud & Local Coding Workspace for Linux
+Exec=julesdeck %U
+Icon=julesdeck
+Terminal=false
+Categories=Development;IDE;
+Keywords=jules;google;ai;coding;agent;git;
+StartupNotify=true
+StartupWMClass=JulesDeck

@@ -1,0 +1,26 @@
+# Dependency directories
+node_modules/
+/node_modules
+
+# Build artifacts
+dist/
+.install-*
+
+# Logs & temp files
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.tmp
+*.corrupt.*
+
+# Local session storage & runtime cache
+accounts.json
+window-state.json
+recent-repos.json
+deleted-sessions.json
+.cookie-cache/
+
+# OS metadata
+.DS_Store
+Thumbs.db

@@ -1,0 +1,48 @@
+{
+  "name": "julesdeck",
+  "productName": "JulesDeck",
+  "version": "1.0.0",
+  "description": "JulesDeck \u2014 Native Linux Desktop Client for Google Jules with Local Mode & Multi-Account Switcher",
+  "main": "dist/main/index.js",
+  "scripts": {
+    "build": "tsc && mkdir -p dist/chrome/assets && cp -r src/chrome/assets/. dist/chrome/assets/ && cp src/chrome/index.html src/chrome/chrome.css dist/chrome/",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "test:e2e": "npx electron tests/e2e_electron_runner.cjs --headless --no-sandbox && npx electron tests/e2e_julestest_runner.cjs --headless --no-sandbox && npx electron tests/e2e_local_ui_visibility_runner.cjs --headless --no-sandbox && npx electron tests/e2e_stress_runner.cjs --headless --no-sandbox",
+    "check": "npm run typecheck && npm run lint && npm test",
+    "package": "./packaging/install.sh",
+    "start": "npm run build && electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/OSINTCabal/JulesDeck.git"
+  },
+  "homepage": "https://github.com/OSINTCabal/JulesDeck#readme",
+  "bugs": {
+    "url": "https://github.com/OSINTCabal/JulesDeck/issues"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "keywords": [
+    "jules",
+    "google-jules",
+    "electron",
+    "desktop",
+    "linux",
+    "ai",
+    "coding-agent"
+  ],
+  "author": "OSINTCabal",
+  "license": "MIT",
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@types/node": "26.6.5",
+    "electron": "45.0.0",
+    "eslint": "10.13.0",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.72.0",
+    "vitest": "5.0.5"
+  }
+}
